@@ -12,6 +12,15 @@ MOUNTS=(
   "/tmp/pgdata-identity:/mnt/pgdata-identity"
 )
 
+ensure_dirs() {
+  for d in /tmp/pgdata-auth /tmp/pgdata-identity; do
+    if [ ! -d "$d" ]; then
+      echo "Creating directory $d"
+      mkdir -p "$d"
+    fi
+  done
+}
+
 MOUNT_PIDS=()
 
 start_minikube() {
@@ -20,6 +29,7 @@ start_minikube() {
 }
 
 start_mounts() {
+  ensure_dirs
   echo "Mounting folders..."
   for m in "${MOUNTS[@]}"; do
     minikube mount $m &
