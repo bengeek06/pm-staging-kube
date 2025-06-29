@@ -1,0 +1,9 @@
+[submodule "pm-auth-api"]
+	path = pm-auth-api
+	url = git@github.com:bengeek06/pm-auth-api.git
+[submodule "pm-identity-api"]
+	path = pm-identity-api
+	url = git@github.com:bengeek06/pm-identity-api.git
+[submodule "pm-front"]
+	path = pm-front
+	url = git@github.com:bengeek06/pm-front.git
