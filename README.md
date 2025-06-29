@@ -1,8 +1,17 @@
 # pm-staging-kube
 
+![Kubernetes](https://img.shields.io/badge/kubernetes-ready-blue?logo=kubernetes)
+![Tilt](https://img.shields.io/badge/tilt-dev-green?logo=tilt)
+![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
+![PostgreSQL](https://img.shields.io/badge/postgres-2%20databases-blue?logo=postgresql)
+![Next.js](https://img.shields.io/badge/next.js-frontend-black?logo=next.js)
+![Swagger](https://img.shields.io/badge/swagger-ui-green?logo=swagger)
+![Flask](https://img.shields.io/badge/flask-api-black?logo=flask)
+![Python](https://img.shields.io/badge/python-3.11-blue?logo=python)
+
 This repository contains Kubernetes and Tilt configuration for a multi-service development environment with:
 - Multiple Python APIs (`pm-auth-api`, `pm-identity-api`)
-- Two PostgreSQL databases
+- Two persistent PostgreSQL databases
 - A Next.js frontend
 - Swagger UI for interactive API documentation
 - PgAdmin for database administration
@@ -21,35 +30,26 @@ pm-identity-api/      # Identity service source code and Dockerfile
 pm-front/             # Next.js frontend
 ```
 
-## How to start the environment
+## How to start/stop the environment
 
-1. **Start Minikube**
-   ```bash
-   minikube start --driver=docker
-   ```
+Use the provided script to manage the full dev environment:
 
-2. **Mount folders for Swagger UI and pm-front**
-   (Open three terminals)
-   ```bash
-   minikube mount ./pm-auth-api:/mnt/pm-auth-api
-   minikube mount ./pm-identity-api:/mnt/pm-identity-api
-   minikube mount ./pm-front:/mnt/pm-front
-   ```
+```bash
+./dev-env.sh start   # Start minikube, all mounts, and Tilt
+./dev-env.sh stop    # Stop Tilt, all mounts, and minikube
+./dev-env.sh reload  # Restart all mounts (if needed)
+```
 
-3. **Start Tilt**
-   ```bash
-   tilt up
-   ```
-   Access the Tilt UI at http://localhost:10350
+Access the Tilt UI at http://localhost:10350
 
-4. **Service endpoints**
-   - **Swagger UI**: http://localhost:8081
-   - **PgAdmin**: http://localhost:8080 (login: admin@admin.com / adminpass)
-   - **pm-auth-api**: http://localhost:5000
-   - **pm-identity-api**: http://localhost:5001
-   - **pm-front**: http://localhost:3000
-   - **Postgres auth-db**: localhost:5432
-   - **Postgres identity-db**: localhost:5433
+### Service endpoints
+- **Swagger UI**: http://localhost:8081
+- **PgAdmin**: http://localhost:8080 (login: admin@admin.com / adminpass)
+- **pm-auth-api**: http://localhost:5000
+- **pm-identity-api**: http://localhost:5001
+- **pm-front**: http://localhost:3000
+- **Postgres auth-db**: localhost:5432
+- **Postgres identity-db**: localhost:5433
 
 ## License
 See LICENSE and LICENCE.md files in each directory.

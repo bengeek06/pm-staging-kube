@@ -29,4 +29,6 @@ spec:
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: pgdata
-          emptyDir: {}
+          hostPath:
+            path: /mnt/pgdata-auth
+            type: DirectoryOrCreate
