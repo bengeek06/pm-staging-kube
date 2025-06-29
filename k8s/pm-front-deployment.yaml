@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm-front
+  template:
+    metadata:
+      labels:
+        app: pm-front
+    spec:
+      containers:
+        - name: pm-front
+          image: pm-front:latest
+          command: ["sh", "-c", "npm install && npm run dev"]
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: code
+              mountPath: /app
+              subPath: .
+            - name: node-modules
+              mountPath: /app/node_modules
+      volumes:
+        - name: code
+          hostPath:
+            path: /mnt/pm-front
+            type: Directory
+        - name: node-modules
+          emptyDir: {}

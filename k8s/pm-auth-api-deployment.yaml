@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm-auth-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm-auth-api
+  template:
+    metadata:
+      labels:
+        app: pm-auth-api
+    spec:
+      containers:
+        - name: pm-auth-api
+          image: pm-auth-api:latest
+          env:
+            - name: FLASK_ENV
+              value: staging
+            #- name: DATABASE_URL
+            #  value: postgres://authuser:authpass@auth-db:5432/auth
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pm-auth-api
+spec:
+  type: ClusterIP
+  selector:
+    app: pm-auth-api
+  ports:
+    - port: 5000
+      targetPort: 5000

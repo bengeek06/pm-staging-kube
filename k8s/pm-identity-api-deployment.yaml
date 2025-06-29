@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm-identity-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm-identity-api
+  template:
+    metadata:
+      labels:
+        app: pm-identity-api
+    spec:
+      containers:
+        - name: pm-identity-api
+          image: pm-identity-api:latest
+          env:
+            - name: FLASK_ENV
+              value: staging
+            #- name: DATABASE_URL
+            #  value: postgresql://identity:password@identity-db:5432/identity_staging
+          ports:
+            - containerPort: 5000

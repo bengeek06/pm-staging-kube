@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swagger-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swagger-ui
+  template:
+    metadata:
+      labels:
+        app: swagger-ui
+    spec:
+      containers:
+        - name: swagger-ui
+          image: swaggerapi/swagger-ui
+          env:
+            - name: URLS
+              value: |
+                [
+                  {"url": "/openapi/pm-auth-api.yml", "name": "PM Auth API"},
+                  {"url": "/openapi/pm-identity-api.yml", "name": "PM Identity API"}
+                ]
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: pm-auth-api
+              mountPath: /usr/share/nginx/html/openapi/pm-auth-api.yml
+              subPath: openapi.yml
+            - name: pm-identity-api
+              mountPath: /usr/share/nginx/html/openapi/pm-identity-api.yml
+              subPath: openapi.yml
+      volumes:
+        - name: pm-auth-api
+          hostPath:
+            path: /mnt/pm-auth-api
+            type: Directory
+        - name: pm-identity-api
+          hostPath:
+            path: /mnt/pm-identity-api
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swagger-ui
+spec:
+  type: ClusterIP
+  selector:
+    app: swagger-ui
+  ports:
+    - port: 8080
+      targetPort: 8080
