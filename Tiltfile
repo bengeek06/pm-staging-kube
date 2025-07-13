@@ -1,11 +1,18 @@
 k8s_yaml([
-    "k8s/postgres-auth-deployment.yaml",
+    "k8s/auth-db-deployment.yaml",
+    "k8s/auth-db-service.yaml",
+    "k8s/identity-db-deployment.yaml",
+    "k8s/identity-db-service.yaml",
     "k8s/pgadmin-deployment.yaml",
+    "k8s/pgadmin-service.yaml",
     "k8s/pm-auth-api-deployment.yaml",
-    "k8s/postgres-identity-deployment.yaml",
+    "k8s/pm-auth-api-service.yaml",
     "k8s/pm-identity-api-deployment.yaml",
+    "k8s/pm-identity-api-service.yaml",
     "k8s/swagger-ui-deployment.yaml",
+    "k8s/swagger-ui-service.yaml",
 #    "k8s/pm-front-deployment.yaml",
+#    "k8s/pm-front-service.yaml",
 ])
 
 docker_build('pm-auth-api', './pm-auth-api', dockerfile='./pm-auth-api/Dockerfile')

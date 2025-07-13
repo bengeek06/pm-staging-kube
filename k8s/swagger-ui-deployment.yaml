@@ -40,15 +40,4 @@ spec:
           hostPath:
             path: /mnt/pm-identity-api
             type: Directory
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: swagger-ui
-spec:
-  type: ClusterIP
-  selector:
-    app: swagger-ui
-  ports:
-    - port: 8080
-      targetPort: 8080
+
