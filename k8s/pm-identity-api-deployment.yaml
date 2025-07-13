@@ -18,7 +18,16 @@ spec:
           env:
             - name: FLASK_ENV
               value: staging
-            #- name: DATABASE_URL
-            #  value: postgresql://identity:password@identity-db:5432/identity_staging
           ports:
             - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pm-identity-api
+spec:
+  selector:
+    app: pm-identity-api
+  ports:
+    - port: 5000
+      targetPort: 5000

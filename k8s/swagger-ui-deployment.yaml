@@ -19,17 +19,17 @@ spec:
             - name: URLS
               value: |
                 [
-                  {"url": "/openapi/pm-auth-api.yml", "name": "PM Auth API"},
-                  {"url": "/openapi/pm-identity-api.yml", "name": "PM Identity API"}
+                  {"url": "/openapi/pm-auth-api", "name": "PM Auth API"},
+                  {"url": "/openapi/pm-identity-api", "name": "PM Identity API"}
                 ]
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: pm-auth-api
-              mountPath: /usr/share/nginx/html/openapi/pm-auth-api.yml
+              mountPath: /usr/share/nginx/html/openapi/pm-auth-api
               subPath: openapi.yml
             - name: pm-identity-api
-              mountPath: /usr/share/nginx/html/openapi/pm-identity-api.yml
+              mountPath: /usr/share/nginx/html/openapi/pm-identity-api
               subPath: openapi.yml
       volumes:
         - name: pm-auth-api
