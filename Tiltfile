@@ -11,7 +11,7 @@ k8s_yaml([
     "k8s/pm-identity-api-service.yaml",
     "k8s/swagger-ui-deployment.yaml",
     "k8s/swagger-ui-service.yaml",
-    "k8s/pm-front-deployment.yaml",
+    "k8s/pm-front-deployment-with-configmap.yaml",
     "k8s/pm-front-service.yaml",
 ])
 
@@ -45,5 +45,10 @@ k8s_resource('swagger-ui', port_forwards='8081:8080')
 
 # pm-front
 k8s_resource('pm-front', port_forwards=3000)
-
+#local_resource(
+#    'pm-front-deps',
+#    cmd='npm install',
+#    deps=['package.json', 'package-lock.json'],
+#    ignore=['node_modules']
+#)
 
