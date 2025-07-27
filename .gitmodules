@@ -7,3 +7,6 @@
 [submodule "pm-front"]
 	path = pm-front
 	url = git@github.com:bengeek06/pm-front.git
+[submodule "pm-guardian-api"]
+	path = pm-guardian-api
+	url = git@github.com:bengeek06/pm-guardian-api.git
