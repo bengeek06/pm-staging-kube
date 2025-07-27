@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm-guardian-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm-guardian-api
+  template:
+    metadata:
+      labels:
+        app: pm-guardian-api
+    spec:
+      containers:
+        - name: pm-guardian-api
+          image: pm-guardian-api:latest
+          env:
+            - name: FLASK_ENV
+              value: staging
+          ports:
+            - containerPort: 5000

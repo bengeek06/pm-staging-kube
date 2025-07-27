@@ -3,12 +3,16 @@ k8s_yaml([
     "k8s/auth-db-service.yaml",
     "k8s/identity-db-deployment.yaml",
     "k8s/identity-db-service.yaml",
+    "k8s/guardian-db-deployment.yaml",
+    "k8s/guardian-db-service.yaml",
     "k8s/pgadmin-deployment.yaml",
     "k8s/pgadmin-service.yaml",
     "k8s/pm-auth-api-deployment.yaml",
     "k8s/pm-auth-api-service.yaml",
     "k8s/pm-identity-api-deployment.yaml",
     "k8s/pm-identity-api-service.yaml",
+    "k8s/pm-guardian-api-deployment.yaml",
+    "k8s/pm-guardian-api-service.yaml",
     "k8s/swagger-ui-deployment.yaml",
     "k8s/swagger-ui-service.yaml",
 #    "k8s/pm-front-deployment-with-configmap.yaml",
@@ -17,6 +21,7 @@ k8s_yaml([
 
 docker_build('pm-auth-api', './pm-auth-api', dockerfile='./pm-auth-api/Dockerfile')
 docker_build('pm-identity-api', './pm-identity-api', dockerfile='./pm-identity-api/Dockerfile')
+docker_build('pm-guardian-api', './pm-guardian-api', dockerfile='./pm-guardian-api/Dockerfile')
 #docker_build(
 #    'pm-front',
 #    './pm-front',
@@ -33,11 +38,17 @@ k8s_resource('auth-db', port_forwards=5432)
 # Port-forward pour accéder à Postgres identity-db en local sur localhost:5433 si besoin
 k8s_resource('identity-db', port_forwards='5433:5432')
 
+# Port-forward pour accéder à Postgres guardian-db en local sur localhost:5434 si besoin
+k8s_resource('guardian-db', port_forwards='5434:5432')
+
 # pm-auth-api
 k8s_resource('pm-auth-api', port_forwards=5000)
 
 # pm-identity-api
 k8s_resource('pm-identity-api', port_forwards='5001:5000')
+
+# pm-guardian-api
+k8s_resource('pm-guardian-api', port_forwards='5002:5000')
 
 # swagger-ui
 #k8s_resource('swagger-ui', port_forwards=8081)

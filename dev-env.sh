@@ -7,13 +7,15 @@ set -e
 MOUNTS=(
   "./pm-auth-api:/mnt/pm-auth-api"
   "./pm-identity-api:/mnt/pm-identity-api"
+  "./pm-guardian-api:/mnt/pm-guardian-api"
   "./pm-front:/mnt/pm-front"
   "/tmp/pgdata-auth:/mnt/pgdata-auth"
   "/tmp/pgdata-identity:/mnt/pgdata-identity"
+  "/tmp/pgdata-guardian:/mnt/pgdata-guardian"
 )
 
 ensure_dirs() {
-  for d in /tmp/pgdata-auth /tmp/pgdata-identity; do
+  for d in /tmp/pgdata-auth /tmp/pgdata-identity /tmp/pgdata-guardian; do
     if [ ! -d "$d" ]; then
       echo "Creating directory $d"
       mkdir -p "$d"
